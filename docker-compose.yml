@@ -1,0 +1,54 @@
+<<<<<<< HEAD
+version: '3.8'
+
+=======
+version: '3'
+>>>>>>> 1b206d614589b0df7079994e41120cafce736271
+services:
+  web:
+    build: .
+    ports:
+<<<<<<< HEAD
+      - "3000:3000"
+=======
+      - "8000:8000"
+    environment:
+      - PORT=8000
+>>>>>>> 1b206d614589b0df7079994e41120cafce736271
+    networks:
+      - onion_net
+
+  tor:
+    image: goldy/tor-hidden-service:latest
+<<<<<<< HEAD
+    environment:
+      WEBSITE_TOR_SERVICE_HOSTS: 80:web:3000
+      # Uncomment and set these for persistent .onion address
+      # WEBSITE_TOR_SERVICE_KEY: ${TOR_SERVICE_KEY}
+      # WEBSITE_TOR_SERVICE_VERSION: '3'
+    networks:
+      - onion_net
+    volumes:
+      - tor_data:/var/lib/tor/hidden_service/
+=======
+    links:
+      - web
+    environment:
+      VIRTUAL_PORT: 8000
+      VIRTUAL_HOST: web
+      TOR_SERVICE_HOSTS: '80:web:8000'
+    networks:
+      - onion_net
+    volumes:
+      - ./tor-keys:/var/lib/tor/hidden_service/
+>>>>>>> 1b206d614589b0df7079994e41120cafce736271
+
+networks:
+  onion_net:
+    driver: bridge
+<<<<<<< HEAD
+
+volumes:
+  tor_data:
+=======
+>>>>>>> 1b206d614589b0df7079994e41120cafce736271
